@@ -89,6 +89,15 @@ for (let i = 1; i <= 100; i++) {
       
       //empty upstream
       currCellObj.upstream=curUpstream;
+
+      //downstream par jaao 
+      let currDownstream=currCellObj.downstream;
+      for(let i=0;i<currDownstream.length;i++){
+        updateCell(currDownstream[i]);
+      }
+
+
+
     })
 
     rowDiv.append(cellDiv);
@@ -114,5 +123,28 @@ function removeselfDownstram(parentCell,childCell){
     }
   }
   dataObj[parentCell].downstream=filteredDownstream;
+}
 
+
+function updateCell(cell){
+  let cellObj=dataObj[cell];
+  let upstream=cellObj.upstream;//[a1,b1]
+  let formula=cellObj.formula;//a1+b1;
+
+
+  // {
+  //   a1:20,
+  //   b1:10
+  // }
+  let valueObj={};
+  for(let i=0;i<upstream.length;i++){
+    let cellVlaue=dataObj[upstream[i]].value;
+    valueObj[upstream[i]]=cellVlaue;
+  }
+
+  for(let key in valueObj){
+    formula=formula.replace(key,valueObj[key]);
+  }
+  let newValue=eval(formula);
+  
 }
