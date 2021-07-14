@@ -78,11 +78,41 @@ for (let i = 1; i <= 100; i++) {
       let currCellAddress=e.currentTarget.getAttribute("data-address");
       let currCellObj=dataObj[currCellAddress];
       currCellObj.value=e.currentTarget.innerText;
+      currCellObj.formula=undefined;
+      //now go to upstream
+      let curUpstream=currCellObj.upstream;
+      //for eac cell goto downstram
+      for(let k=0;k<curUpstream.length;k++){
+        //remove ourself
+        removeselfDownstram(curUpstream[k],currCellAddress);
+      }
+      
+      //empty upstream
+      currCellObj.upstream=curUpstream;
     })
 
     rowDiv.append(cellDiv);
   }
 
   cellSection.append(rowDiv)
+
+}
+
+
+//c1=formulae(2*a1)
+//parent a1
+//child c1
+
+function removeselfDownstram(parentCell,childCell){
+  //fetch parent ka downstream
+  let parentCellDownstream=dataObj[parentCell].downstream;
+  //filter karo childCell ko parent ki upstram se
+  let filteredDownstream=[];
+  for(let i=0;i<parentCellDownstream.length;i++){
+    if(parentCellDownstream[i]!=childCell){
+      filteredDownstream.push(parentCellDownstream[i]);
+    }
+  }
+  dataObj[parentCell].downstream=filteredDownstream;
 
 }
