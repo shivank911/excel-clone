@@ -29,11 +29,13 @@ body {
 }
 
 .menu-bar-section div {
+  position: relative;
   margin-left: 20px;
   color: black;
 }
 
 .menu-options-section {
+  display: flex;
   height: 8%;
   background-color: #2ecc71;
 }
@@ -48,12 +50,9 @@ body {
   width: 20%;
   display: flex;
   justify-content: center;
+  background-color: white;
   border: 1px solid;
   align-items: center;
-}
-
-.selected-cell-div{
-  background-color: white;
 }
 
 .formula-section input {
@@ -136,19 +135,44 @@ body {
   overflow: auto;
 }
 
-
-.cell{
+.cell {
   width: 80px;
   height: 30px;
   border: 1px solid;
   flex-shrink: 0;
   outline: none;
-  overflow: auto;
 }
 
-.cell-selected{
-  border: 2px solid blueviolet;
+.cell-selected {
+  border: 2px solid rgb(60, 60, 218);
 }
-.row{
+
+.row {
   display: flex;
+}
+
+.menu-options-section div {
+  border: 1px solid;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.bold-italics-underline,
+.align-cell-content,
+.cell-color-options {
+  width: 23%;
+}
+
+.font-type-size {
+  width: 31%;
+}
+
+.file-drop-down {
+  position: absolute !important;
+  background-color: white;
+  left: -20px;
+  width: 4rem;
+  text-align: center;
 }
